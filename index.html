@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Lucky</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+height:100vh;
+background:radial-gradient(circle at top,#1a1a2e,#000);
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+color:white;
+font-family:Georgia,serif;
+}
+
+.container{
+text-align:center;
+max-width:820px;
+padding:20px;
+animation:heartbeat 2.5s infinite;
+}
+
+@keyframes heartbeat{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.025);}
+}
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:2.7rem;
+color:#ffd6e8;
+margin-bottom:20px;
+animation:fade 1.5s forwards;
+}
+
+.couple{
+width:150px;height:120px;
+margin:20px auto 35px;
+position:relative;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+}
+
+.person{
+width:40px;height:80px;
+background:white;
+border-radius:20px;
+position:absolute;top:20px;
+}
+.boy{left:20px;}
+.girl{right:20px;}
+
+.hand{
+width:50px;height:6px;
+background:white;
+position:absolute;
+top:60px;left:50px;
+border-radius:3px;
+}
+
+p{
+font-size:1.2rem;
+line-height:1.9;
+opacity:0;
+animation:fade 1.2s forwards;
+margin-bottom:14px;
+}
+
+p:nth-child(4){animation-delay:2s;}
+p:nth-child(5){animation-delay:4s;}
+p:nth-child(6){animation-delay:6s;}
+p:nth-child(7){animation-delay:8s;}
+p:nth-child(8){animation-delay:10s;}
+p:nth-child(9){animation-delay:12s;}
+
+@keyframes fade{
+to{opacity:1;}
+}
+
+.final{
+font-size:1.35rem;
+color:#ffd6e8;
+margin-top:25px;
+}
+
+.heart{
+position:absolute;
+color:rgba(255,105,180,0.9);
+animation:rise linear infinite;
+}
+
+@keyframes rise{
+from{transform:translateY(100vh);opacity:0;}
+to{transform:translateY(-10vh);opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Happy New Year, Lucky ✨</h1>
+
+<div class="couple">
+<div class="person boy"></div>
+<div class="hand"></div>
+<div class="person girl"></div>
+</div>
+
+<p>I won’t lie — it hurt.</p>
+<p>It still does.</p>
+<p>Some nights are quiet, but my heart isn’t.</p>
+<p>I imagined a life with you… and I never replaced it.</p>
+<p>I’m not desperate, I’m honest.</p>
+<p>I still believe love should be chosen, not forced.</p>
+
+<p class="final">
+The year has changed,<br>
+but I’m still the same —<br>
+still waiting for you, Lucky.<br><br>
+<span style="font-size:1rem;opacity:0.7;">— from me</span>
+</p>
+</div>
+
+<script>
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(18+Math.random()*22)+"px";
+h.style.animationDuration=(6+Math.random()*5)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),12000);
+},700);
+</script>
+
+</body>
+</html>
