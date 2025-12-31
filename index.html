@@ -2,179 +2,751 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Lucky</title>
+<title>From My Heart 🤍</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
 body{
-height:100vh;
-background:radial-gradient(circle at top,#1b1b2f,#000);
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-color:white;
-font-family:Georgia,serif;
+  height:100vh;
+  background: radial-gradient(circle at top, #16002f, #030009);
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+  position: relative;
 }
-
-.container{
-text-align:center;
-max-width:800px;
-padding:20px;
-display:none;
-animation:heartbeat 2.5s infinite;
+/* canvas for fireworks - toned down */
+#fireworks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+  opacity: 0.7; /* reduced opacity for classier look */
 }
-
-@keyframes heartbeat{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.02);}
+/* stars */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:0.6;
+  animation:twinkle 3s infinite alternate;
 }
-
-h1{
-font-family:'Playfair Display',serif;
-font-size:2.5rem;
-color:#ffd6e8;
-margin-bottom:18px;
+@keyframes twinkle{
+  from{opacity:0.2; transform: scale(1);}
+  to{opacity:0.8; transform: scale(1.2);}
 }
-
-.couple{
-width:150px;height:120px;
-margin:20px auto 35px;
-position:relative;
-animation:float 4s ease-in-out infinite;
+.center{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  padding:20px;
+  z-index: 1;
 }
-
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-8px);}
+/* start */
+#start button{
+  padding:16px 44px;
+  font-size:20px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,#ff6fae,#ffb7d5);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 0 40px rgba(255,120,190,0.8);
+  animation:pulse 2s infinite;
 }
-
-.person{
-width:40px;height:80px;
-background:white;
-border-radius:20px;
-position:absolute;top:20px;
-}
-.boy{left:20px;}
-.girl{right:20px;}
-
-.hand{
-width:50px;height:6px;
-background:white;
-position:absolute;
-top:60px;left:50px;
-border-radius:3px;
-}
-
-p{
-font-size:1.2rem;
-line-height:1.9;
-opacity:0;
-margin-bottom:14px;
-}
-
-.final{
-font-size:1.35rem;
-color:#ffd6e8;
-margin-top:25px;
-}
-
-.heart{
-position:absolute;
-color:rgba(255,105,180,0.85);
-animation:rise linear infinite;
-}
-
-@keyframes rise{
-from{transform:translateY(100vh);opacity:0;}
-to{transform:translateY(-10vh);opacity:1;}
-}
-
-/* Tap button */
-#startBtn{
-position:absolute;
-padding:16px 34px;
-font-size:1.2rem;
-border:none;
-border-radius:30px;
-background:#ff6f91;
-color:white;
-cursor:pointer;
-box-shadow:0 0 20px rgba(255,105,180,0.6);
-animation:pulse 1.5s infinite;
-}
-
 @keyframes pulse{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.08);}
+  0%{transform:scale(1)}
+  50%{transform:scale(1.06)}
+  100%{transform:scale(1)}
+}
+/* scene */
+#scene{display:none}
+/* characters */
+.characters{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  margin-bottom:20px;
+  flex-wrap: wrap; /* allow wrapping if more characters */
+}
+.cat, .bunny, .bear, .fox, .panda{
+  width:140px;
+  animation:float 3s ease-in-out infinite;
+}
+.bunny {
+  animation: float 3.5s ease-in-out infinite;
+}
+.bear {
+  animation: float 4s ease-in-out infinite;
+}
+.fox {
+  animation: float 2.8s ease-in-out infinite;
+}
+.panda {
+  animation: float 3.2s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-15px) rotate(2deg)}
+}
+/* cat parts */
+.head{
+  width:90px;
+  height:90px;
+  background:#fff;
+  border-radius:50%;
+  margin:auto;
+  position:relative;
+}
+.ear{
+  width:22px;
+  height:30px;
+  background:#fff;
+  border-radius:50%;
+  position:absolute;
+  top:-12px;
+}
+.ear.left{left:10px; transform:rotate(-20deg)}
+.ear.right{right:10px; transform:rotate(20deg)}
+.eye{
+  width:10px;
+  height:10px;
+  background:#000;
+  border-radius:50%;
+  position:absolute;
+  top:38px;
+  animation:blink 4s infinite;
+}
+.eye.left{left:28px}
+.eye.right{right:28px}
+@keyframes blink{
+  0%,90%,100%{transform:scaleY(1)}
+  92%{transform:scaleY(0.1)}
+}
+.blush{
+  width:12px;
+  height:6px;
+  background:pink;
+  border-radius:50%;
+  position:absolute;
+  top:52px;
+  opacity:0.6;
+}
+.blush.left{left:18px}
+.blush.right{right:18px}
+.smile{
+  width:18px;
+  height:10px;
+  border-bottom:2px solid #000;
+  border-radius:0 0 20px 20px;
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+}
+.body{
+  width:70px;
+  height:80px;
+  background:#fff;
+  border-radius:40px;
+  margin:6px auto 0;
+  position:relative;
+}
+.hand{
+  width:18px;
+  height:30px;
+  background:#fff;
+  border-radius:20px;
+  position:absolute;
+  top:20px;
+}
+.hand.left{left:-8px; animation: wave 2s infinite;}
+.hand.right{right:-8px; animation: wave 2s infinite 1s;}
+@keyframes wave {
+  0%, 100% {transform: rotate(0deg);}
+  50% {transform: rotate(20deg);}
+}
+/* bunny parts */
+.bunny .head {
+  background: #fff;
+}
+.bunny .ear {
+  height: 50px;
+  top: -30px;
+  width: 18px;
+  border-radius: 20px 20px 0 0;
+}
+.bunny .ear.left {left: 15px; transform: rotate(-10deg);}
+.bunny .ear.right {right: 15px; transform: rotate(10deg);}
+.bunny .tail {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: wiggle 1s infinite;
+}
+@keyframes wiggle {
+  0%, 100% {transform: translateX(-50%) rotate(0deg);}
+  50% {transform: translateX(-50%) rotate(5deg);}
+}
+/* bear parts */
+.bear-container {
+  position: relative;
+  transform: scale(0.7);
+}
+.bear-head {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #B78654;
+  border-radius: 50%;
+}
+.bear-head-copy {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #B78654;
+  border-radius: 50%;
+  z-index: 2;
+}
+.bear-ear-left {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  left: 5%;
+  top: 5%;
+  background: #B78654;
+  border-radius: 50%;
+  z-index: 1;
+}
+.bear-ear-right {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  right: 5%;
+  top: 5%;
+  background: #B78654;
+  border-radius: 50%;
+  z-index: 1;
+}
+.bear-inner-ear {
+  position: absolute;
+  border-radius: 50%;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  background: #BE9265;
+}
+.bear-eye-left {
+  position: absolute;
+  background: darkbrown;
+  width: 20%;
+  height: 30%;
+  top: 35%;
+  left: 21%;
+  border-radius: 50%;
+  z-index: 3;
+  animation: bear-blink 5s infinite;
+}
+.bear-eye-right {
+  position: absolute;
+  background: darkbrown;
+  width: 20%;
+  height: 30%;
+  top: 35%;
+  right: 21%;
+  border-radius: 50%;
+  z-index: 3;
+  animation: bear-blink 5s infinite;
+}
+@keyframes bear-blink {
+  0%, 90%, 100% {transform: scaleY(1);}
+  92% {transform: scaleY(0.1);}
+}
+.bear-pupil {
+  position: absolute;
+  width: 28%;
+  height: 30%;
+  top: 35%;
+  left: 36%;
+  border-radius: 50%;
+  background: #000000;
+}
+.bear-shadow {
+  position: absolute;
+  background: #BE9265;
+  width: 42%;
+  height: 38%;
+  left: 29%;
+  top: 62%;
+  border-radius: 50px;
+  z-index: 3;
+}
+.bear-nose {
+  position: absolute;
+  background: #000000;
+  width: 21%;
+  height: 18.5%;
+  left: 39%;
+  top: 66%;
+  border-radius: 50px;
+  z-index: 4;
+}
+.bear-body {
+  width: 70px;
+  height: 80px;
+  background: #B78654;
+  border-radius: 40px;
+  margin: 6px auto 0;
+  position: relative;
+}
+.bear-hand {
+  width: 18px;
+  height: 30px;
+  background: #B78654;
+  border-radius: 20px;
+  position: absolute;
+  top: 20px;
+}
+.bear-hand.left {left: -8px;}
+.bear-hand.right {right: -8px;}
+/* fox parts - new cute character */
+.fox .head {
+  background: #ff8c00; /* orange */
+  width: 90px;
+  height: 90px;
+  border-radius: 50% 50% 60% 60% / 40% 40% 60% 60%; /* pointy snout */
+}
+.fox .ear {
+  height: 40px;
+  width: 25px;
+  background: #ff8c00;
+  border-radius: 50% 50% 0 0;
+  top: -20px;
+}
+.fox .ear.left {left: 5px; transform: rotate(-15deg);}
+.fox .ear.right {right: 5px; transform: rotate(15deg);}
+.fox .eye {
+  top: 35px;
+  width: 12px;
+  height: 12px;
+}
+.fox .blush {top: 50px;}
+.fox .smile {
+  bottom: 15px;
+  width: 20px;
+  border-bottom: 3px solid #000;
+}
+.fox .body {
+  background: #ff8c00;
+}
+.fox .hand {
+  background: #ff8c00;
+}
+.fox .tail {
+  width: 30px;
+  height: 50px;
+  background: #ff8c00;
+  border-radius: 50% 50% 50% 0;
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  transform: rotate(45deg);
+  animation: wiggle 1.5s infinite;
+}
+/* panda parts - new cute character */
+.panda .head {
+  background: #fff;
+  border: 2px solid #000; /* black borders for panda look */
+}
+.panda .ear {
+  background: #000;
+  height: 25px;
+  width: 25px;
+  top: -10px;
+}
+.panda .ear.left {left: 5px;}
+.panda .ear.right {right: 5px;}
+.panda .eye-patch {
+  width: 25px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 35px;
+}
+.panda .eye-patch.left {left: 15px;}
+.panda .eye-patch.right {right: 15px;}
+.panda .eye {
+  background: #fff;
+  width: 6px;
+  height: 6px;
+  top: 8px;
+  left: 9px;
+  animation: none; /* no blink for variety */
+}
+.panda .eye.left {left: auto;}
+.panda .eye.right {right: auto;}
+.panda .blush {display: none;}
+.panda .smile {
+  border-bottom: 2px solid #000;
+  width: 15px;
+  bottom: 25px;
+}
+.panda .body {
+  background: #fff;
+  border: 2px solid #000;
+}
+.panda .hand {
+  background: #000;
+}
+/* gift */
+.gift{
+  font-size:34px;
+  margin:10px 0;
+  animation:giftShake 2s infinite;
+}
+@keyframes giftShake{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(3deg)}
+  75%{transform:rotate(-3deg)}
+}
+/* button */
+.btn{
+  padding:12px 32px;
+  border:none;
+  border-radius:30px;
+  background:#ff6fae;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(255,111,174,0.5);
+  animation: pulse 2s infinite;
+}
+/* letter */
+#letter{
+  display:none;
+  max-width:480px;
+  margin:auto;
+  padding:32px;
+  background:rgba(255,255,255,0.08);
+  border-radius:26px;
+  backdrop-filter:blur(14px);
+  box-shadow:0 0 50px rgba(255,120,190,0.5);
+  animation:fadeUp 1.6s ease forwards;
+}
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(26px) scale(0.95)}
+  to{opacity:1; transform:translateY(0) scale(1)}
+}
+h2{
+  margin-bottom:18px;
+  font-weight:600;
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  from {text-shadow: 0 0 5px #ff6fae;}
+  to {text-shadow: 0 0 15px #ff6fae;}
+}
+.line{
+  opacity:0;
+  margin-bottom:14px;
+  line-height:1.55;
+  animation:show 1.2s forwards, colorShift 5s infinite alternate;
+}
+@keyframes show{to{opacity:1}}
+@keyframes colorShift {
+  from {color: #fff;}
+  to {color: #ffb7d5;}
+}
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:18px;
+  animation:rise 7s linear infinite;
+  color: #ff6fae;
+}
+@keyframes rise{
+  from{transform:translateY(0) rotate(0deg); opacity:1}
+  to{transform:translateY(-760px) rotate(360deg); opacity:0}
 }
 </style>
 </head>
-
 <body>
-
-<button id="startBtn">Tap to start ❤️</button>
-
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6d65d3d8c8.mp3" type="audio/mpeg">
+<!-- fireworks canvas -->
+<canvas id="fireworks"></canvas>
+<!-- audio -->
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8d7b1f55.mp3" type="audio/mpeg">
 </audio>
-
-<div class="container" id="content">
-<h1>Happy New Year, Lucky ✨</h1>
-
-<div class="couple">
-<div class="person boy"></div>
-<div class="hand"></div>
-<div class="person girl"></div>
+<!-- start -->
+<div id="start" class="center">
+  <button onclick="start()">Tap to Begin 🤍</button>
 </div>
-
-<p>I won’t lie — it hurt.</p>
-<p>It still does.</p>
-<p>Some nights are quiet, but my heart isn’t.</p>
-<p>I imagined a life with you… and never replaced it.</p>
-<p>I’m not desperate, I’m honest.</p>
-<p>I still believe love should be chosen.</p>
-
-<p class="final">
-The year has changed,<br>
-but I’m still the same —<br>
-still waiting for you, Lucky.<br><br>
-<span style="font-size:1rem;opacity:0.7;">— from me</span>
-</p>
+<!-- scene -->
+<div id="scene" class="center">
+  <div class="characters">
+    <div class="cat">
+      <div class="head">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="blush left"></div>
+        <div class="blush right"></div>
+        <div class="smile"></div>
+      </div>
+      <div class="body">
+        <div class="hand left"></div>
+        <div class="hand right"></div>
+      </div>
+    </div>
+    <div class="bunny">
+      <div class="head">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="blush left"></div>
+        <div class="blush right"></div>
+        <div class="smile"></div>
+      </div>
+      <div class="body">
+        <div class="hand left"></div>
+        <div class="hand right"></div>
+        <div class="tail"></div>
+      </div>
+    </div>
+    <div class="bear">
+      <div class="bear-container">
+        <div class="bear-head">
+          <div class="bear-head-copy"></div>
+          <div class="bear-ear-left">
+            <div class="bear-inner-ear"></div>
+          </div>
+          <div class="bear-ear-right">
+            <div class="bear-inner-ear"></div>
+          </div>
+          <div class="bear-eye-left">
+            <div class="bear-pupil"></div>
+          </div>
+          <div class="bear-eye-right">
+            <div class="bear-pupil"></div>
+          </div>
+          <div class="bear-shadow"></div>
+          <div class="bear-nose"></div>
+        </div>
+        <div class="bear-body">
+          <div class="bear-hand left"></div>
+          <div class="bear-hand right"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fox">
+      <div class="head">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="blush left"></div>
+        <div class="blush right"></div>
+        <div class="smile"></div>
+      </div>
+      <div class="body">
+        <div class="hand left"></div>
+        <div class="hand right"></div>
+        <div class="tail"></div>
+      </div>
+    </div>
+    <div class="panda">
+      <div class="head">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="eye-patch left"><div class="eye left"></div></div>
+        <div class="eye-patch right"><div class="eye right"></div></div>
+        <div class="smile"></div>
+      </div>
+      <div class="body">
+        <div class="hand left"></div>
+        <div class="hand right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="gift">🎁</div>
+  <button class="btn" onclick="openGift()">Open the Gift</button>
 </div>
-
+<!-- letter -->
+<div id="letter" class="center">
+  <h2>Happy New Year 🤍</h2>
+  <p class="line" style="animation-delay:0.8s;">
+    This wish comes straight from my heart — truly and deeply.
+  </p>
+  <p class="line" style="animation-delay:2.6s;">
+    I never learned to live without you; I just exist, day by day.
+  </p>
+  <p class="line" style="animation-delay:4.6s;">
+    Some days, I fight back the tears; others, I fake a smile.
+  </p>
+  <p class="line" style="animation-delay:6.6s;">
+    But the truth is, my heart aches for you every moment.
+  </p>
+  <p class="line" style="animation-delay:8.6s;">
+    I can't pretend I've moved on — because I haven't, and I never will.
+  </p>
+  <p class="line" style="animation-delay:10.6s;">
+    The calendar flips, but my love for you remains eternal.
+  </p>
+  <p class="line" style="animation-delay:12.6s;">
+    All I wish is for you to come back, to make everything right again.
+  </p>
+  <p class="line" style="animation-delay:14.6s;">
+    No new beginnings without you; you're my only forever.
+  </p>
+  <p class="line" style="animation-delay:16.6s;">
+    — From me. Always and forever 🤍
+  </p>
+</div>
 <script>
-const btn=document.getElementById("startBtn");
-const music=document.getElementById("music");
-const content=document.getElementById("content");
-const lines=document.querySelectorAll("p");
-
-btn.onclick=()=>{
-btn.style.display="none";
-content.style.display="block";
-music.volume=0.6;
-music.play();
-
-let delay=0;
-lines.forEach(line=>{
-setTimeout(()=>{line.style.opacity=1;},delay);
-delay+=2000;
-});
-
-setInterval(()=>{
-const h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤";
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(18+Math.random()*22)+"px";
-h.style.animationDuration=(6+Math.random()*5)+"s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),12000);
-},700);
-};
+/* stars */
+for(let i=0;i<150;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.animationDelay = Math.random() * 3 + "s";
+  document.body.appendChild(s);
+}
+/* fireworks script - toned down */
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+class Particle {
+  constructor(x, y, color) {
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.velocity = {
+      x: (Math.random() - 0.5) * 6, /* slower spread */
+      y: (Math.random() - 0.5) * 6
+    };
+    this.alpha = 1;
+    this.friction = 0.98; /* slower fade */
+  }
+  draw() {
+    ctx.globalAlpha = this.alpha;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+  update() {
+    this.velocity.x *= this.friction;
+    this.velocity.y *= this.friction;
+    this.x += this.velocity.x;
+    this.y += this.velocity.y;
+    this.alpha -= 0.008; /* slower fade */
+  }
+}
+class Firework {
+  constructor(x, y, color) {
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.velocity = {x: 0, y: Math.random() * -2 - 0.5};
+    this.particles = [];
+    this.lifespan = 200; /* longer lifespan */
+    this.hasExploded = false;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+  explode() {
+    for (let i = 0; i < 30; i++) { /* fewer particles */
+      this.particles.push(new Particle(this.x, this.y, this.color));
+    }
+  }
+  update() {
+    this.lifespan--;
+    if (this.lifespan <= 0 && !this.hasExploded) {
+      this.explode();
+      this.velocity = {x: 0, y: 0};
+      this.hasExploded = true;
+    } else if (this.lifespan > 0) {
+      this.y += this.velocity.y;
+    }
+    for (let i = 0; i < this.particles.length; i++) {
+      this.particles[i].update();
+      this.particles[i].draw();
+    }
+  }
+}
+let fireworks = [];
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; /* softer clear */
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  fireworks.forEach((firework, index) => {
+    firework.update();
+    firework.draw();
+    if (firework.lifespan <= 0 && firework.particles.every(p => p.alpha <= 0)) {
+      fireworks.splice(index, 1);
+    }
+  });
+  if (Math.random() < 0.01) { // less frequent
+    const x = Math.random() * canvas.width;
+    const color = `hsl(${Math.random() * 60 + 300}, 50%, 70%)`; /* pastel colors */
+    fireworks.push(new Firework(x, canvas.height, color));
+  }
+}
+function start(){
+  document.getElementById("start").style.display="none";
+  document.getElementById("scene").style.display="block";
+  let bgm=document.getElementById("bgm");
+  bgm.volume=0.35;
+  bgm.play();
+  hearts();
+  animate();
+}
+function openGift(){
+  document.getElementById("scene").style.display="none";
+  document.getElementById("letter").style.display="block";
+  // fewer extra fireworks
+  for (let i = 0; i < 2; i++) {
+    const x = Math.random() * canvas.width;
+    const color = `hsl(${Math.random() * 60 + 300}, 50%, 70%)`;
+    fireworks.push(new Firework(x, canvas.height / 2, color));
+  }
+}
+function hearts(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText="🤍";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize = (Math.random() * 10 + 18) + "px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),7000);
+  },700); // slightly less frequent
+}
 </script>
-
 </body>
 </html>
